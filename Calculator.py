@@ -3,6 +3,7 @@
 import numpy as np
 
 class Calculator:
+    #Dを左からかける
     def dotD(self, vec, width, height):
         ret = []
         for x1 in range(len(vec)):
@@ -12,6 +13,7 @@ class Calculator:
                 ret.append(vec[x1]-vec[x2])
         return ret
 
+    #Dの転置を左からかける
     def dotDT(self, vec, width, height):
         N = width*height
         ret = [0 for i in range(3*N)]
@@ -30,6 +32,7 @@ class Calculator:
             cou+=2
         return ret
 
+#dotDのテストコード、エッジっぽいのが取れる
 if __name__ == '__main__':
     from numpy import linalg as la
     from PIL import Image
