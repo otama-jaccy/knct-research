@@ -2,35 +2,34 @@
 
 import numpy as np
 
-class Calculator:
-    #Dを左からかける
-    def dotD(self, vec, width, height):
-        ret = []
-        for x1 in range(len(vec)):
-            for dx in [3,width*3]:
-                x2 = x1 + dx
-                x2 = x2 if x2<len(vec) else x2-dx
-                ret.append(vec[x1]-vec[x2])
-        return ret
+#Dを左からかける
+def dotD(vec, width, height):
+    ret = []
+    for x1 in range(len(vec)):
+        for dx in [3,width*3]:
+            x2 = x1 + dx
+            x2 = x2 if x2<len(vec) else x2-dx
+            ret.append(vec[x1]-vec[x2])
+    return ret
 
-    #Dの転置を左からかける
-    def dotDT(self, vec, width, height):
-        N = width*height
-        ret = [0 for i in range(3*N)]
-        for x in range(3*N):
-            idx = x*2
-            ret = vec[idx] + vec[idx+1]
+#Dの転置を左からかける
+def dotDT(vec, width, height):
+    N = width*height
+    ret = [0 for i in range(3*N)]
+    for x in range(3*N):
+        idx = x*2
+        ret[x] = vec[idx] + vec[idx+1]
 
-        cou = 1
-        for idx in range(3,3*N):
-            ret[idx] -= vec[cou]
-            cou+=2
+    cou = 1
+    for idx in range(3,3*N):
+        ret[idx] -= vec[cou]
+        cou+=2
 
-        cou = 0
-        for idx in range(3*width, 3*N):
-            ret -= vec[cou]
-            cou+=2
-        return ret
+    cou = 0
+    for idx in range(3*width, 3*N):
+        ret[idx] -= vec[cou]
+        cou+=2
+    return ret
 
 #dotDのテストコード、エッジっぽいのが取れる
 if __name__ == '__main__':
